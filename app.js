@@ -88,7 +88,7 @@ app.get('/getWeekly', function (req, res) {
             console.error("Could not get connection from pool");
             console.error(err);
         } else {
-            connection.query("SELECT word FROM weekly", function (err, results) {
+            connection.query("SELECT word,position FROM weekly ORDER BY position ASC", function (err, results) {
                 if (err) {
                     console.error("Error while getting weekly from DB");
                     console.error(err);
