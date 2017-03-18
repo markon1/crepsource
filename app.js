@@ -5,7 +5,7 @@ var express = require('express'),
 
 var port = process.env.PORT;
 
-var dburl = CLEARDB_DATABASE_URL.replace('mysql://',"").replace('?reconnect=true','');
+var dburl = process.env.CLEARDB_DATABASE_URL.replace('mysql://',"").replace('?reconnect=true','');
 
 var pool = mysql.createPool({
     connectionLimit: 5,
