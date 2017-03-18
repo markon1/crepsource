@@ -1,0 +1,14 @@
+{
+  "name": "kickspoiler",
+  "version": "1.0.0",
+  "description": "KickSpoiler backend",
+  "main": "app.js",
+  "scripts": {
+    "start": "app index.js"
+  },
+  "dependencies": {
+    "express": "",
+    "mysql": "",
+    "body-parser": ""
+  }
+}
