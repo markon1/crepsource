@@ -3,14 +3,16 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     app = express();
 
-var port = 3001;
+var port = process.env.PORT;
+
+var dburl = CLEARDB_DATABASE_URL.replace('mysql://',"").replace('?reconnect=true','');
 
 var pool = mysql.createPool({
-    connectionLimit: 20,
-    host: "127.0.0.1",
-    user: "root",
-    password: "",
-    database: "words"
+    connectionLimit: 5,
+    host: dburl.split('@')[1].split('/')[0],
+    user: dburl.split('@')[0].split(':')[0],
+    password: dburl.split('@')[0].split(':')[1],
+    database: dburl.split('@')[1].split('/')[1]
 });
 
 app.use(bodyParser.json()); // support json encoded bodies
