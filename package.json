@@ -4,7 +4,7 @@
   "description": "KickSpoiler backend",
   "main": "app.js",
   "scripts": {
-    "start": "app index.js"
+    "start": "node app.js"
   },
   "dependencies": {
     "express": "",
