@@ -29,7 +29,7 @@ app.get('/getAffiliates', function (req, res) {
             console.error("Could not get connection from pool");
             console.error(err);
         } else {
-            connection.query("SELECT domain,percentage,affLink FROM aff", function (err, results) {
+            connection.query("SELECT domain,percentage,affLink,storeName FROM aff", function (err, results) {
                 if (err) {
                     console.error("Error while getting affiliates from DB");
                     console.error(err);
