@@ -1,7 +1,7 @@
 {
-  "name": "kickspoiler",
+  "name": "crepsource",
   "version": "1.0.0",
-  "description": "KickSpoiler backend",
+  "description": "crepsource backend",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
