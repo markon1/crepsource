@@ -23,74 +23,15 @@ app.use(function (req, res, next) { // allow all origins
     next();
 });
 
-app.post('/add', function (req, res) {
-    var word = req.body.word;
+app.get('/getAffiliates', function (req, res) {
     pool.getConnection(function (err, connection) {
         if (err) {
             console.error("Could not get connection from pool");
             console.error(err);
         } else {
-            connection.query("INSERT INTO words (word, number) VALUES (?, 1) ON DUPLICATE KEY UPDATE number = number+1;", word, function (err, results) {
+            connection.query("SELECT domain,percentage,affLink FROM aff", function (err, results) {
                 if (err) {
-                    console.error("Error while adding word: "+word +" to DB");
-                    console.error(err);
-                } else {
-                    res.send("ok");
-                    connection.release();
-                }
-            });
-        }
-    });
-});
-
-app.post('/remove', function (req, res) {
-    var word = req.body.word;
-    pool.getConnection(function (err, connection) {
-        if (err) {
-            console.error("Could not get connection from pool");
-            console.error(err);
-        } else {
-            connection.query("UPDATE words SET number = number - 1 WHERE word = ? AND number > 0", word, function (err, results) {
-                if (err) {
-                    console.error("Error while removing word: "+word +" from DB");
-                    console.error(err);
-                } else {
-                    res.send("ok");
-                    connection.release();
-                }
-            });
-        }
-    });
-});
-
-app.get('/getMost', function (req, res) {
-    pool.getConnection(function (err, connection) {
-        if (err) {
-            console.error("Could not get connection from pool");
-            console.error(err);
-        } else {
-            connection.query("SELECT word FROM words WHERE number > 0 ORDER BY number DESC LIMIT 7", function (err, results) {
-                if (err) {
-                    console.error("Error while getting most from DB");
-                    console.error(err);
-                } else {
-                    res.send(results);
-                    connection.release();
-                }
-            });
-        }
-    });
-});
-
-app.get('/getWeekly', function (req, res) {
-    pool.getConnection(function (err, connection) {
-        if (err) {
-            console.error("Could not get connection from pool");
-            console.error(err);
-        } else {
-            connection.query("SELECT word,position FROM weekly ORDER BY position ASC", function (err, results) {
-                if (err) {
-                    console.error("Error while getting weekly from DB");
+                    console.error("Error while getting affiliates from DB");
                     console.error(err);
                 } else {
                     res.send(results);
